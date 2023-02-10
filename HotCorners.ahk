@@ -8,6 +8,23 @@ global activeSwit := false
 
 
 
+CheckMonitors()					; Check the number of monitors. Disable hotcorners in a multi-monitor environment.
+{
+    SysGet, numMonitors, MonitorCount
+    if numMonitors > 1
+    {
+        SetTimer, HotCorners, Off
+    }
+    else
+    {
+        SetTimer, HotCorners, 0
+    }
+}
+
+SetTimer, CheckMonitors, 1000	; Call the CheckMonitors function at an interval of 1 second
+
+
+
 HotCorners: 				; Timer content 
 CoordMode, Mouse, Screen		; Coordinate mode - coords will be passed to mouse related functions, with coords relative to entire screen 
 
